@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String   @unique
+  password   String
+  updated_at DateTime @default(now())
+
+  Marker Marker[]
+}
+
+model Marker {
+  id             Int      @id @default(autoincrement()) 
+  name           String
+  description    String
+  opened_at_days String[]
+  open_hour      String
+  close_hour     String
+  adress         String
+  zip_code       String
+  number         Int
+  complement     String
+  latitude       Float
+  longitude      Float
+  userId         Int
+
+  marked_by User @relation(fields: [userId], onDelete: Cascade, references: [id])
+}
