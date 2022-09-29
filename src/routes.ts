@@ -1,4 +1,5 @@
 import { Router } from "express";
+import BarController from "./controller/BarController";
 import UserController from "./controller/UserController";
 import { verifyToken } from "./middlewares/verifyToken";
 
@@ -27,8 +28,19 @@ router.delete("/user/", UserController.deleteUsers);
 
 // * ROTAS DAS MARCAÇÕES NO MAPA
 
-// create marker
-router.post("/marker",)
-
+// create bar
+router.post("/bar", BarController.createBar);
+// update bar
+router.put("/bar", BarController.updateBar);
+// get all bars
+router.get("/bar/all", BarController.getAllBar)
+// get all bars by id
+router.get("/bar", BarController.getBarById) 
+// get all bars by user id
+router.get("/bar/userId/", BarController.getBarByUserId) 
+// get mine bars 
+router.get("/bar/mine/", BarController.getMineBars) 
+// delete
+router.delete("/bar", BarController.deleteBar) 
 
 export { router };

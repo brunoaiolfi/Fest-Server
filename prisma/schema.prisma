@@ -14,20 +14,20 @@ model User {
   password   String
   updated_at DateTime @default(now())
 
-  Marker Marker[]
+  Marker Bar[]
 }
 
-model Marker {
-  id             Int      @id @default(autoincrement()) 
+model Bar {
+  id             Int      @id @default(autoincrement())
   name           String
-  description    String
+  description    String?
   opened_at_days String[]
   open_hour      String
   close_hour     String
   adress         String
   zip_code       String
   number         Int
-  complement     String
+  complement     String?
   latitude       Float
   longitude      Float
   userId         Int

@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { User } from "../../models/User";
+import { generateHash } from "../utils/generateHash";
 
 const prisma = new PrismaClient();
 
@@ -27,10 +28,10 @@ export async function getUserById(id: number) {
 export async function getUserByEmail(email: string) {
   try {
     // coleta o estado pelo nome
-    const tempStates = await prisma.user.findFirst({ where: { email } });
+    const response = await prisma.user.findFirst({ where: { email } });
 
     // E retorna o que achou
-    return tempStates;
+    return response;
   } catch (error) {
     throw new Error(error);
   }
@@ -39,17 +40,18 @@ export async function getUserByEmail(email: string) {
 // Post user
 export async function postUser(name: string, email: string, password: string) {
   try {
+    const hashedPassword = generateHash(password);
     // Cria o usuário
     const data: User = await prisma.user.create({
       data: {
         name,
         email,
-        password,
+        password: hashedPassword,
       },
     });
 
     // E retorna o usuário criado
-    return data;
+    return {...data, password: ''};
   } catch (error) {
     throw new Error(error);
   }
@@ -83,12 +85,12 @@ export async function deleteUser(id: number) {
 
 export async function signIn(login: string, password: string) {
   try {
-    console.log(login, password);
+    const hashedPassword = generateHash(password)
 
     const response = await prisma.user.findFirst({
       where: {
         email: login,
-        password: password,
+        password: hashedPassword,
       },
     });
 

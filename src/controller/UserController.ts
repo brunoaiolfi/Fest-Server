@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PrismaClient, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import {
   deleteUser,
   getUserAll,
@@ -22,6 +22,7 @@ export default {
 
       return res.json({ users: response });
     } catch (error) {
+      console.log(error);
       return res.status(500).send("Ocorreu um erro no servidor!");
     }
   },
@@ -140,12 +141,12 @@ export default {
 
   async signIn(req: Request, res: Response) {
     try {
-      const { login, password } = req.body;
+      const { email, password } = req.body;
 
-      if (!login || !password)
+      if (!email || !password)
         return res.status(400).send("Preencha todos os campos corretamente!");
 
-      const user = await signIn(login, password);
+      const user = await signIn(email, password);
 
       if (!user) return res.status(404).send("Nenhum usuário encontrado!");
 

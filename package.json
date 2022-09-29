@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "@prisma/client": "^3.11.0",
+    "@types/crypto-js": "^4.1.1",
     "@types/jsonwebtoken": "^8.5.9",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.2",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
