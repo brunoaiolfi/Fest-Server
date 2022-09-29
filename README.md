@@ -35,7 +35,7 @@
 
 ## Como utilizar 
   
-  Após baixar o repositório utilize um `yarn add` para fazer o download de todas as dependências.
-  Após isto crie um arquivo .env conforme o exemplo.
-  Cria uma migration do banco de dados utilizando `prisma migrate dev --name init`.
-  Inicie o projeto com o comando `yarn dev`.
+-  Após baixar o repositório utilize um `yarn add` para fazer o download de todas as dependências.
+-  Após isto crie um arquivo .env conforme o exemplo.
+-  Crie uma migration do banco de dados utilizando `prisma migrate dev --name init`.
+-  Inicie o projeto com o comando `yarn dev`.
